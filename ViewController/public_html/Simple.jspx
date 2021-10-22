@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <f:view>
+        <af:document title="Simple.jspx" id="d1">
+            <af:messages id="m1"/>
+            <af:form id="f1">
+                <af:button actionListener="#{bindings.Delete.execute}" text="Delete"
+                            id="b1"/>
+                <af:spacer id="s1" height="10" width="10"/>
+                <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
+                            id="b2"/>
+                <af:table value="#{bindings.StudentVO1.collectionModel}" var="row"
+                          rows="#{bindings.StudentVO1.rangeSize}"
+                          emptyText="#{bindings.StudentVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" selectedRowKeys="#{bindings.StudentVO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.StudentVO1.collectionModel.makeCurrent}" rowSelection="single"
+                          fetchSize="#{bindings.StudentVO1.rangeSize}" id="t1"
+                          partialTriggers="sbc1 selectAllCheckBox ::b1"
+                          styleClass="AFStretchWidth">
+                    <af:column headerText="#{bindings.StudentVO1.hints.Num.label}" id="c1">
+                        <af:inputText value="#{row.bindings.Num.inputValue}"
+                                      label="#{bindings.StudentVO1.hints.Num.label}"
+                                      required="#{bindings.StudentVO1.hints.Num.mandatory}"
+                                      columns="#{bindings.StudentVO1.hints.Num.displayWidth}"
+                                      maximumLength="#{bindings.StudentVO1.hints.Num.precision}"
+                                      shortDesc="#{bindings.StudentVO1.hints.Num.tooltip}" id="it1">
+                            <f:validator binding="#{row.bindings.Num.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.StudentVO1.hints.Num.format}"/>
+                        </af:inputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.StudentVO1.hints.Name.label}" id="c2">
+                        <af:inputText value="#{row.bindings.Name.inputValue}"
+                                      label="#{bindings.StudentVO1.hints.Name.label}"
+                                      required="#{bindings.StudentVO1.hints.Name.mandatory}"
+                                      columns="#{bindings.StudentVO1.hints.Name.displayWidth}"
+                                      maximumLength="#{bindings.StudentVO1.hints.Name.precision}"
+                                      shortDesc="#{bindings.StudentVO1.hints.Name.tooltip}" id="it2">
+                            <f:validator binding="#{row.bindings.Name.validator}"/>
+                        </af:inputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.StudentVO1.hints.DeptId.label}" id="c3">
+                        <af:inputText value="#{row.bindings.DeptId.inputValue}"
+                                      label="#{bindings.StudentVO1.hints.DeptId.label}"
+                                      required="#{bindings.StudentVO1.hints.DeptId.mandatory}"
+                                      columns="#{bindings.StudentVO1.hints.DeptId.displayWidth}"
+                                      maximumLength="#{bindings.StudentVO1.hints.DeptId.precision}"
+                                      shortDesc="#{bindings.StudentVO1.hints.DeptId.tooltip}" id="it3">
+                            <f:validator binding="#{row.bindings.DeptId.validator}"/>
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.StudentVO1.hints.DeptId.format}"/>
+                        </af:inputText>
+                    </af:column>
+                    <!--<af:column headerText="#{bindings.StudentVO1.hints.City.label}" id="c4">
+                        <af:inputText value="#{row.bindings.City.inputValue}"
+                                      label="#{bindings.StudentVO1.hints.City.label}"
+                                      required="#{bindings.StudentVO1.hints.City.mandatory}"
+                                      columns="#{bindings.StudentVO1.hints.City.displayWidth}"
+                                      maximumLength="#{bindings.StudentVO1.hints.City.precision}"
+                                      shortDesc="#{bindings.StudentVO1.hints.City.tooltip}" id="it4">
+                            <f:validator binding="#{row.bindings.City.validator}"/>
+                        </af:inputText>
+                    </af:column>-->
+                    <af:column headerText="#{bindings.StudentVO1.hints.Status.label}" id="c5">
+                        <af:selectBooleanCheckbox value="#{row.bindings.Status.inputValue}"
+                                                  label="#{row.bindings.Status.label}" autoSubmit="true"
+                                                  shortDesc="#{bindings.StudentVO1.hints.Status.tooltip}" id="sbc1" />
+                        <f:facet name="header">
+                            <af:selectBooleanCheckbox  label="Select All" autoSubmit="true"
+                                                      id="selectAllCheckBox"
+                                                      valueChangeListener="#{pageFlowScope.RowSelectionBean.selectAllCheckBoxVCL}"/>
+                        </f:facet>
+                    </af:column>
+                </af:table>
+            </af:form>
+        </af:document>
+    </f:view>
+</jsp:root>
